@@ -1,0 +1,10 @@
+.game__sun {
+  width: 2rem;
+  height: 2rem;
+  display: block;
+}
+
+.game__sun:hover {
+  transform: scale(1.2);
+  transition: transform 0.3s;
+}
