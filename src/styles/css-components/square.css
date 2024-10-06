@@ -7,11 +7,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 2rem;
+  font-size: 3rem;
   cursor: pointer;
   transition: background-color 0.3s ease;
   color: var(--clr-dark);
   box-shadow: 0 0 10px #939292bf;
+  }
+
+  .square__tile.light-mode {
+    background-color: var(--clr-dark);
   }
 
 .square__tile:hover {

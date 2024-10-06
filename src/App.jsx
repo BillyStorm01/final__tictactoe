@@ -13,11 +13,15 @@ import ThemeToggle from './components-jsx/theme-toggle.jsx';
 
 function App() {
 
+  // States
   const [board, setBoard] = useState(Array(9).fill(null));
   const [xIsNext, setXisNext] = useState(true);
   const [playerStatus, setPlayerStatus] = useState('Next player: X')
   const [isDarkMode, setIsDarkMode] = useState(true);
+  const [hasWon, setHasWon] = useState(null)
+  const [scores, setScores] = useState({ xScore: 0, oScore: 0 });
 
+  // Add X or O to Square
   const handleSquareClick = (index) => {
     const newBoard = board.slice();
     if (calculateWinner(newBoard) || newBoard[index]) return;
@@ -26,13 +30,14 @@ function App() {
     setXisNext(!xIsNext);
   };
 
+  // Reset Game Board
   const resetGame = () => {
     setBoard(Array(9).fill(null))
     setXisNext(true)
     setPlayerStatus('Next player: X')
   }
 
-
+// Theme useEffect
   useEffect(() => {
     if (!isDarkMode) {
       document.body.classList.add('light-mode')
@@ -43,7 +48,12 @@ function App() {
     }
   }, [isDarkMode]);
 
+  // Score useEffect
+  useEffect(() => {
 
+  },[hasWon])
+
+// Theme Toggle Button
   const toggleTheme = () => {
     setIsDarkMode(prev => !prev);
   };
