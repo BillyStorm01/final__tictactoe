@@ -8,7 +8,7 @@ import '../src/styles/utils.css'
 
 //Component Imports
 import Board from '../src/components-jsx/board.jsx'
-import ResetBoardBtn from './components-jsx/reset-board-button.jsx';
+import ResetBtns from './components-jsx/reset-buttons.jsx';
 import ThemeToggle from './components-jsx/theme-toggle.jsx';
 import Footer from './components-jsx/footer.jsx';
 
@@ -65,9 +65,9 @@ function App() {
 
   return (
     <div className='game__container'>
-      <strong><h1>{status}</h1></strong>
+      {xIsNext ? <h1 style={{ color: 'var(--clr-rose)' }}>{status}</h1> : <h1 style={{ color: 'var(--clr-indigo)' }}>{status}</h1>}
       <Board squares={board} onClick={handleSquareClick} isDarkMode={isDarkMode} />
-      <ResetBoardBtn resetGame={resetGame} />
+      <ResetBtns resetGame={resetGame} />
       <ThemeToggle toggleTheme={toggleTheme} isDarkMode={isDarkMode}/>
       <Footer />
     </div>

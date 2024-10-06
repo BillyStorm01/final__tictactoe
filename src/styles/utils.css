@@ -36,6 +36,29 @@
     0 10px 10px rgba(225, 29, 72, 0.22), 0 0 120px -10px var(--clr-rose);
 }
 
+.btn2 {
+  display: inline-block;
+  font-weight: 600;
+  text-decoration: none;
+  letter-spacing: -0.05em;
+  background-color: var(--clr-indigo); 
+  color: #f1f5f9;
+  padding: 0.5em 1em;
+  border-radius: 6px;
+  box-shadow: 0 12px 24px rgba(75, 0, 130, 0.8), 
+    0 8px 10px rgba(75, 0, 130, 0.7),
+    0 0 150px -10px var(--clr-indigo); 
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.btn2:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 32px rgba(75, 0, 130, 0.6),
+    0 12px 12px rgba(75, 0, 130, 0.6),
+    0 0 160px -10px var(--clr-indigo); 
+}
+
+
 .container {
   width: 100%;
   margin-left: auto;
