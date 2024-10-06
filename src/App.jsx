@@ -10,13 +10,14 @@ import '../src/styles/utils.css'
 import Board from '../src/components-jsx/board.jsx'
 import ResetBoardBtn from './components-jsx/reset-board-button.jsx';
 import ThemeToggle from './components-jsx/theme-toggle.jsx';
+import Footer from './components-jsx/footer.jsx';
 
 function App() {
 
   // States
   const [board, setBoard] = useState(Array(9).fill(null));
   const [xIsNext, setXisNext] = useState(true);
-  const [playerStatus, setPlayerStatus] = useState('Next player: X')
+  const [playerStatus, setPlayerStatus] = useState()
   const [isDarkMode, setIsDarkMode] = useState(true);
   const [hasWon, setHasWon] = useState(null)
   const [scores, setScores] = useState({ xScore: 0, oScore: 0 });
@@ -34,10 +35,10 @@ function App() {
   const resetGame = () => {
     setBoard(Array(9).fill(null))
     setXisNext(true)
-    setPlayerStatus('Next player: X')
+    setPlayerStatus('NEXT PLAYER: X')
   }
 
-// Theme useEffect
+  // Theme useEffect
   useEffect(() => {
     if (!isDarkMode) {
       document.body.classList.add('light-mode')
@@ -51,23 +52,24 @@ function App() {
   // Score useEffect
   useEffect(() => {
 
-  },[hasWon])
+  }, [hasWon])
 
-// Theme Toggle Button
+  // Theme Toggle Button
   const toggleTheme = () => {
     setIsDarkMode(prev => !prev);
   };
 
 
   const winner = calculateWinner(board);
-  const status = winner ? `Winner: ${winner}` : `Next player: ${xIsNext ? 'X' : 'O'}`;
+  const status = winner ? `Winner: ${winner}` : `NEXT PLAYER: ${xIsNext ? 'X' : 'O'}`;
 
   return (
     <div className='game__container'>
-      <h1>{status}</h1>
-      <Board squares={board} onClick={handleSquareClick} />
-      <ResetBoardBtn resetGame={resetGame}/>
-      <ThemeToggle toggleTheme={toggleTheme}/>
+      <strong><h1>{status}</h1></strong>
+      <Board squares={board} onClick={handleSquareClick} isDarkMode={isDarkMode} />
+      <ResetBoardBtn resetGame={resetGame} />
+      <ThemeToggle toggleTheme={toggleTheme} isDarkMode={isDarkMode}/>
+      <Footer />
     </div>
   )
 }

@@ -5,5 +5,5 @@
   place-items: center;
   row-gap: .4rem;
   column-gap: 2.5rem;
-  margin: 2rem auto;
+  z-index: 999;
 }

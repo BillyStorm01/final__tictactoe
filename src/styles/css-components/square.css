@@ -1,8 +1,6 @@
 .square__tile {
   width: 8rem;
   height: 8rem;
-  background-color: #fff;
-  border: 2px solid #333;
   border-radius: 1rem;
   display: flex;
   justify-content: center;
@@ -11,29 +9,38 @@
   cursor: pointer;
   transition: background-color 0.3s ease;
   color: var(--clr-dark);
+}
+
+.square__tile.light-mode {
+  background-color: var(--clr-dark);
+  border: 2px solid #616161;
+  box-shadow: 0 0 10px #242424bf;
+}
+
+.square__tile.light-mode:hover {
+  background-color: rgb(27, 27, 27);
+}
+
+.square__tile.dark-mode {
+  background-color: var(--clr-light);
+  border: 2px solid #333;
   box-shadow: 0 0 10px #939292bf;
-  }
+}
 
-  .square__tile.light-mode {
-    background-color: var(--clr-dark);
-  }
-
-.square__tile:hover {
-  background-color: #d1d0d0;
+.square__tile.dark-mode:hover {
+  background-color: #b4b4b4;
 }
 
 .square__tile:focus {
-  outline: none; 
+  outline: none;
 }
 
 .x {
-    color: var(--clr-rose);
-    text-shadow: 0 0 12px #e61c7ab7;
+  color: var(--clr-rose);
+  text-shadow: 0 0 12px #e61c7ab7;
 }
 
 .o {
-    color: var(--clr-indigo);
-    text-shadow: 0 0 12px #1c5380cf;
+  color: var(--clr-indigo);
+  text-shadow: 0 0 12px #1c5380cf;
 }
-
-

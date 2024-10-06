@@ -58,3 +58,11 @@ button {
   place-items: center;
 }
 
+a {
+  color: var(--clr-rose);
+}
+
+strong {
+  color: var(--clr-indigo);
+}
+
