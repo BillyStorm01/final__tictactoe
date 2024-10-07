@@ -80,7 +80,7 @@ function App() {
     }
   }, [winner]);
 
-  const status = winner ? `${winner} WINS!` : `It's ${xIsNext ? 'X' : 'O'}'s Turn`;
+  const status = winner ? `${winner} WINS!` : `${xIsNext ? 'X' : 'O'}'s Turn`;
   const statusColor = winner
     ? winner === 'X'
       ? 'var(--clr-rose)'

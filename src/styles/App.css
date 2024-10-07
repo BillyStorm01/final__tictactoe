@@ -81,7 +81,7 @@ strong {
   align-items: center;
   display: block;
   text-align: center;
-  font-size: 14px;
+  font-size: 1rem;
   color: #010101;
   border: 2px solid #000000;
   z-index: 9999;
@@ -90,4 +90,22 @@ strong {
 .modal__text {
   font-weight: 600;
   font-size: 2rem;
+}
+
+.status {
+  margin: .7rem 0 .7rem 0;
+  display: inline;
+}
+
+/* xs */
+@media (max-width: 475px) {
+  .Modal {
+    width: 18.6rem;
+    height: 12rem;
+  }
+
+  .modal__text {
+  font-weight: 600;
+  font-size: 1.5rem;
+}
 }

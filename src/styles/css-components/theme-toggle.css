@@ -2,9 +2,14 @@
   width: 2rem;
   height: 2rem;
   display: block;
+  margin-top: .5rem;
 }
 
 .game__sun:hover {
   transform: scale(1.2);
   transition: transform 0.3s;
+}
+
+p {
+  margin-top: .2rem;
 }
