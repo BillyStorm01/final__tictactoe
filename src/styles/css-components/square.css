@@ -5,7 +5,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 3rem;
+  font-size: 3rem !important;
   cursor: pointer;
   transition: background-color 0.3s ease;
   color: var(--clr-dark);
@@ -35,12 +35,12 @@
   outline: none;
 }
 
-.x {
+.x_tile {
   color: var(--clr-rose);
   text-shadow: 0 0 12px #e61c7ab7;
 }
 
-.o {
+.o_tile {
   color: var(--clr-indigo);
   text-shadow: 0 0 12px #1c5380cf;
 }

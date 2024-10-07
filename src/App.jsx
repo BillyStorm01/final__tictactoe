@@ -1,28 +1,28 @@
 import React, { useState, useEffect } from 'react';
 
-//CSS Imports
-import '../src/styles/modern-normalize.css'
-import '../src/styles/App.css'
-import '../src/styles/utils.css'
+// CSS Imports
+import '../src/styles/modern-normalize.css';
+import '../src/styles/App.css';
+import '../src/styles/utils.css';
 
-
-//Component Imports
-import Board from '../src/components-jsx/board.jsx'
+// Component Imports
+import Scoreboard from './components-jsx/score-board.jsx';
+import Board from '../src/components-jsx/board.jsx';
 import ResetBtns from './components-jsx/reset-buttons.jsx';
 import ThemeToggle from './components-jsx/theme-toggle.jsx';
 import Footer from './components-jsx/footer.jsx';
+import Confetti from './components-jsx/Confetti.jsx'; // Import the Confetti component
 
 function App() {
-
   // States
   const [board, setBoard] = useState(Array(9).fill(null));
   const [xIsNext, setXisNext] = useState(true);
-  const [playerStatus, setPlayerStatus] = useState()
+  const [xPlayer, setXPlayer] = useState(true);
   const [isDarkMode, setIsDarkMode] = useState(true);
-  const [hasWon, setHasWon] = useState(null)
+  const [Modal, showModal] = useState(false);
   const [scores, setScores] = useState({ xScore: 0, oScore: 0 });
 
-  // Add X or O to Square
+  // Handle Square Click
   const handleSquareClick = (index) => {
     const newBoard = board.slice();
     if (calculateWinner(newBoard) || newBoard[index]) return;
@@ -33,48 +33,90 @@ function App() {
 
   // Reset Game Board
   const resetGame = () => {
-    setBoard(Array(9).fill(null))
-    setXisNext(true)
-    setPlayerStatus('NEXT PLAYER: X')
-  }
+    setBoard(Array(9).fill(null));
+    setXisNext(true);
+    showModal(false);
+    setXPlayer(true);
+  };
+
+  //Reset Score Board 
+  const resetScore = () => {
+    setBoard(Array(9).fill(null));
+    setXisNext(true);
+    showModal(false);
+    setXPlayer(true);
+    setScores({ xScore: 0, oScore: 0 })
+  };
 
   // Theme useEffect
   useEffect(() => {
     if (!isDarkMode) {
-      document.body.classList.add('light-mode')
-      document.body.classList.remove('dark-mode')
+      document.body.classList.add('light-mode');
+      document.body.classList.remove('dark-mode');
     } else {
-      document.body.classList.add('dark-mode')
-      document.body.classList.remove('light-mode')
+      document.body.classList.add('dark-mode');
+      document.body.classList.remove('light-mode');
     }
   }, [isDarkMode]);
 
-  // Score useEffect
-  useEffect(() => {
-
-  }, [hasWon])
-
   // Theme Toggle Button
   const toggleTheme = () => {
-    setIsDarkMode(prev => !prev);
+    setIsDarkMode((prev) => !prev);
   };
 
-
+  // Winner and Status
   const winner = calculateWinner(board);
-  const status = winner ? `Winner: ${winner}` : `NEXT PLAYER: ${xIsNext ? 'X' : 'O'}`;
 
+  useEffect(() => {
+    if (winner) {
+      if (winner === 'X') {
+        let xScore = scores.xScore + 1;
+        setScores({ ...scores, xScore });
+      } else if (winner === 'O') {
+        let oScore = scores.oScore + 1;
+        setScores({ ...scores, oScore });
+      }
+      showModal(true);
+    }
+  }, [winner]);
+
+  const status = winner ? `${winner} WINS!` : `It's ${xIsNext ? 'X' : 'O'}'s Turn`;
+  const statusColor = winner
+    ? winner === 'X'
+      ? 'var(--clr-rose)'
+      : 'var(--clr-indigo)'
+    : xIsNext
+      ? 'var(--clr-rose)'
+      : 'var(--clr-indigo)';
+
+  const modalStyle = winner === 'X' ? 'btn' : 'btn2';
+
+  // HTML
   return (
     <div className='game__container'>
-      {xIsNext ? <h1 style={{ color: 'var(--clr-rose)' }}>{status}</h1> : <h1 style={{ color: 'var(--clr-indigo)' }}>{status}</h1>}
+      {Modal && (
+        <div className='Modal'>
+          <h1 className='modal__text'>Good Game,</h1>
+          <h1 className='modal__text'>{`Player ${winner} Won!`}</h1>
+          <button className={modalStyle} onClick={resetGame}>
+            Rematch?
+          </button>
+        </div>
+      )}
+      <Scoreboard scores={scores} setXPlayer={xPlayer} />
+      <h1 className='status' style={{ color: statusColor }}>
+        {status}
+      </h1>
       <Board squares={board} onClick={handleSquareClick} isDarkMode={isDarkMode} />
-      <ResetBtns resetGame={resetGame} />
-      <ThemeToggle toggleTheme={toggleTheme} isDarkMode={isDarkMode}/>
+      {winner && <Confetti />}
+      <ResetBtns resetGame={resetGame} resetScore={resetScore}/>
+      <ThemeToggle toggleTheme={toggleTheme} isDarkMode={isDarkMode} />
       <Footer />
     </div>
-  )
+  );
 }
 
-//Calculating Winner Logic
+// Calculate Winner
 const calculateWinner = (squares) => {
   const lines = [
     [0, 1, 2],
